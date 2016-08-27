@@ -14,6 +14,7 @@ Want to see the current progress?
 
 # Playing Tiger's Game
 - arrow keys move up/down/left/right
+- 'S' to sleep
 
 # Completed
 + Setup SBT project

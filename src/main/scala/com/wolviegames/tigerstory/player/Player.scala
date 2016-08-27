@@ -125,6 +125,17 @@ class BasicTiger extends BasicPlayer{
         healthRating += amount
     }
 
+    // Tiger satiety levels
+    if (stat == "satiety") {
+      if (amount + satietyRating > 100) satietyRating = 100
+      else if (amount + satietyRating < 0) {
+        satietyRating = 0
+        statCalculator("health", amount)
+      }
+      else
+        satietyRating += amount
+    }
+
   }
 
   // Basic Player
@@ -134,6 +145,7 @@ class BasicTiger extends BasicPlayer{
       case "cave" => {
         statCalculator("energy", 100)
         statCalculator("health", 20)
+        statCalculator("satiety", -20)
         actionMessage = "Sleep Good. Energy Up. Stronger Now."
         resetError
       }
@@ -167,6 +179,7 @@ class BasicTiger extends BasicPlayer{
       case "north" => if (gridPositionY < maxRows-1){
         gridPositionY += 1
         statCalculator("energy", -5)
+        statCalculator("satiety", -2)
         setPositionInformation(tileGrid(gridPositionX)(gridPositionY))
         resetActionMessage
         resetError
@@ -174,6 +187,7 @@ class BasicTiger extends BasicPlayer{
       case "east" => if (gridPositionX < maxCols-1){
         gridPositionX += 1
         statCalculator("energy", -5)
+        statCalculator("satiety", -2)
         setPositionInformation(tileGrid(gridPositionX)(gridPositionY))
         resetActionMessage
         resetError
@@ -181,6 +195,7 @@ class BasicTiger extends BasicPlayer{
       case "south" => if (gridPositionY > 0){
         gridPositionY -= 1
         statCalculator("energy", -5)
+        statCalculator("satiety", -2)
         setPositionInformation(tileGrid(gridPositionX)(gridPositionY))
         resetActionMessage
         resetError
@@ -188,6 +203,7 @@ class BasicTiger extends BasicPlayer{
       case "west" => if (gridPositionX > 0){
         gridPositionX -= 1
         statCalculator("energy", -5)
+        statCalculator("satiety", -2)
         setPositionInformation(tileGrid(gridPositionX)(gridPositionY))
         resetActionMessage
         resetError

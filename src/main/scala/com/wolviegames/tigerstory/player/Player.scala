@@ -1,8 +1,8 @@
 package com.wolviegames.tigerstory.player
 
-import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.{BitmapFont, SpriteBatch}
+import com.wolviegames.tigerstory.world.Tile
 
 /**
   * The player is the tiger that gets to Move Around The Screen And Do Things.
@@ -16,8 +16,9 @@ trait Player {
   var gridPositionX: Int
   var gridPositionY: Int
   var tigerTexture: Texture
+  var currentPosition: Tile
 
-  def getPositionInformation
+  def setPositionInformation(tile: Tile)
   def setTigerTexture(texture: Texture)
   def drawTiger(spriteBatch: SpriteBatch, timeSize: Int)
   def drawStats(spriteBatch: SpriteBatch)
@@ -42,7 +43,11 @@ class BasicTiger extends BasicPlayer{
   var gridPositionX: Int = 0
   var gridPositionY: Int = 0
   var tigerTexture: Texture = null // you're killing me smalls
+  var currentPosition: Tile = null // rageface
 
+  def setPositionInformation(tile: Tile): Unit = {
+    currentPosition = tile
+  }
 
   def setTigerTexture(texture: Texture): Unit = {
     tigerTexture = texture

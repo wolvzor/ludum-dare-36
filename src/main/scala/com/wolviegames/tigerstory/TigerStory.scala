@@ -48,6 +48,8 @@ class TigerStory extends Game {
     spriteBatch = new SpriteBatch()
     tigerTexture = new Texture(Gdx.files.internal("tiger-small.jpg"))
     defaultTile = new GameTile("default", new Texture(Gdx.files.internal("grass.jpg")))
+    val homeTile = new GameTile("cave", new Texture(Gdx.files.internal("cave.jpg")))
+    tigerPlayer.setPositionInformation(homeTile)
     inputTimestamp = DateTime.now()
 
     val tileMap = buildTileMap
@@ -66,20 +68,30 @@ class TigerStory extends Game {
 
     // Player Input - limit window to .125 seconds so we aren't zooming around the place
     if (DateTime.now().getMillis > (inputTimestamp.getMillis + 125)) {
+      // Movement commands
       if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
-        tigerPlayer.move(GAME_ROWS, GAME_COLS, "north")
+        tigerPlayer.move(GAME_ROWS, GAME_COLS, "north", gridMcGridFace)
         inputTimestamp = DateTime.now()
       }
       if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-        tigerPlayer.move(GAME_ROWS, GAME_COLS, "south")
+        tigerPlayer.move(GAME_ROWS, GAME_COLS, "south", gridMcGridFace)
+        inputTimestamp = DateTime.now()
         inputTimestamp = DateTime.now()
       }
       if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-        tigerPlayer.move(GAME_ROWS, GAME_COLS, "east")
+        tigerPlayer.move(GAME_ROWS, GAME_COLS, "east", gridMcGridFace)
+        inputTimestamp = DateTime.now()
         inputTimestamp = DateTime.now()
       }
       if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-        tigerPlayer.move(GAME_ROWS, GAME_COLS, "west")
+        tigerPlayer.move(GAME_ROWS, GAME_COLS, "west", gridMcGridFace)
+        inputTimestamp = DateTime.now()
+        inputTimestamp = DateTime.now()
+      }
+
+      // Actions
+      if (Gdx.input.isKeyPressed(Input.Keys.S)) {
+        tigerPlayer.sleep
         inputTimestamp = DateTime.now()
       }
     }

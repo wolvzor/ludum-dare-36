@@ -22,11 +22,11 @@ Want to see the current progress?
 + added grid code to display game layout
 + tiger base stats (satiety, health, energy, intelligence)
 + Basic background sound ambiance
-+ Tiger movement
++ Tiger base actions(move, sleep)
 + Tiger dead/alive
 
 # TODO
-- tiger base actions (sleep, hunt, mate, observe)
+- tiger base actions (hunt, mate, observe)
 - tiger base flavor text
 - intelligence benchmarks (carry items, use tools, acquire resources, discover fire, etc)
 - tiger intermediate stats (self-esteem, actualization, self-efficacy, depression, anxiety, these are just ideas?)

@@ -10,10 +10,7 @@ Want to see the current progress?
 - Install SBT
 - Should probably have scala somewhere
 - Run `sbt run`
-- Look at the grid of wonders!
-
-# Known Issues
-- `fatal error C9999: out of memory - internal malloc failed`: this is because I'm in HackyMcKludgeFo mode, and initializing `var`s and `val`s in the draw code, which is stupid. I'll move it elsewhere probably first thing Saturday morning?
+- Look at the grid of wonders and tiger stats!!
 
 # Completed
 + Setup SBT project

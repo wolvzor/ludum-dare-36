@@ -2,9 +2,10 @@ package com.wolviegames.tigerstory
 
 import com.badlogic.gdx.audio.Sound
 import com.badlogic.gdx.graphics.{GL20, Texture}
-import com.badlogic.gdx.{Game, Gdx}
+import com.badlogic.gdx.{Game, Gdx, Input}
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.wolviegames.tigerstory.player.{BasicPlayer, BasicTiger, Player}
+import org.joda.time.DateTime
 
 class TigerStory extends Game {
 
@@ -20,7 +21,9 @@ class TigerStory extends Game {
   var tigerTexture: Texture = null
   var defaultTexture: Texture = null
 
-  var tigerPlayer: Player = new BasicTiger()
+  var tigerPlayer: BasicTiger = new BasicTiger()
+
+  var inputTimestamp = DateTime.now()
 
   def buildTextureMap: Map[String, Texture] = Map(
     ("boarTexture", new Texture(Gdx.files.internal("boar.jpg"))),
@@ -44,10 +47,14 @@ class TigerStory extends Game {
     spriteBatch = new SpriteBatch()
     tigerTexture = new Texture(Gdx.files.internal("tiger-small.jpg"))
     defaultTexture = new Texture(Gdx.files.internal("grass.jpg"))
+    inputTimestamp = DateTime.now()
 
     val textureMap = buildTextureMap
 
     populateGrid(textureMap, defaultTexture)
+
+    // tiger inits
+    tigerPlayer.setTigerTexture(tigerTexture)
 
     val soundMap = loadSounds
     soundMap.getOrElse("nature",null).loop(1.0f)
@@ -55,6 +62,26 @@ class TigerStory extends Game {
   }
 
   override def render(): Unit = {
+
+    // Player Input - limit window to .125 seconds so we aren't zooming around the place
+    if (DateTime.now().getMillis > (inputTimestamp.getMillis + 125)) {
+      if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
+        tigerPlayer.move(GAME_ROWS, GAME_COLS, "north")
+        inputTimestamp = DateTime.now()
+      }
+      if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
+        tigerPlayer.move(GAME_ROWS, GAME_COLS, "south")
+        inputTimestamp = DateTime.now()
+      }
+      if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+        tigerPlayer.move(GAME_ROWS, GAME_COLS, "east")
+        inputTimestamp = DateTime.now()
+      }
+      if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+        tigerPlayer.move(GAME_ROWS, GAME_COLS, "west")
+        inputTimestamp = DateTime.now()
+      }
+    }
 
     Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT) // Apparently this clears the screen; wtf gdx
     spriteBatch.begin
@@ -65,11 +92,8 @@ class TigerStory extends Game {
       j <- 0 until GAME_COLS
     } spriteBatch.draw(gridMcGridFace(i)(j), i * TILE_SIZE, j * TILE_SIZE, TILE_SIZE, TILE_SIZE)
 
-
-    // Tiger needs to go last (poor thing)
-    spriteBatch.draw(tigerTexture,0,0)
-
-    // Draw Tiger Stats
+    // Draw Tiger
+    tigerPlayer.drawTiger(spriteBatch, TILE_SIZE)
     tigerPlayer.drawStats(spriteBatch)
 
 

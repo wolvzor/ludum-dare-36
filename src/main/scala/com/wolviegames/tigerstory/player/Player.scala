@@ -1,5 +1,7 @@
 package com.wolviegames.tigerstory.player
 
+import com.badlogic.gdx.Gdx
+import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.{BitmapFont, SpriteBatch}
 
 /**
@@ -12,8 +14,11 @@ trait Player {
   var intelligenceRating: Int
   var gridPositionX: Int
   var gridPositionY: Int
+  var tigerTexture: Texture
 
   def getPositionInformation
+  def setTigerTexture(texture: Texture)
+  def drawTiger(spriteBatch: SpriteBatch, timeSize: Int)
   def drawStats(spriteBatch: SpriteBatch)
 }
 
@@ -23,7 +28,7 @@ trait BasicPlayer extends Player{
   def hunt
   def mate
   def observe
-  def move
+  def move(maxRows:Int, maxCols:Int, direction: String)
 }
 
 class BasicTiger extends BasicPlayer{
@@ -33,10 +38,33 @@ class BasicTiger extends BasicPlayer{
   var intelligenceRating: Int = 0
   var gridPositionX: Int = 0
   var gridPositionY: Int = 0
+  var tigerTexture: Texture = null // you're killing me smalls
+
+
+  def setTigerTexture(texture: Texture): Unit = {
+    tigerTexture = texture
+  }
 
   def getPositionInformation: Unit = {
 
   }
+
+  def drawTiger(spriteBatch: SpriteBatch, tileSize: Int): Unit ={
+    spriteBatch.draw(tigerTexture,tileSize * gridPositionX, tileSize * gridPositionY)
+  }
+
+  def drawStats(spriteBatch: SpriteBatch): Unit = {
+    val font:BitmapFont = new BitmapFont()
+    val str: String = "Tiger Statistics:";
+    font.draw(spriteBatch, str, 500, 450);
+
+    font.draw(spriteBatch, s"Health: $healthRating", 500, 430)
+    font.draw(spriteBatch, s"Energy: $energyRating", 500, 410)
+    font.draw(spriteBatch, s"Satiety: $satietyRating", 500, 390)
+    font.draw(spriteBatch, s"Intelligence: $intelligenceRating", 500, 370)
+  }
+
+
 
   def sleep: Unit = {
 
@@ -54,18 +82,32 @@ class BasicTiger extends BasicPlayer{
 
   }
 
-  def move: Unit ={
+  def move(maxRows:Int, maxCols:Int, direction: String): Unit ={
+    println(s"Direction: $direction")
+    println(s"grid position x: $gridPositionX")
+    println(s"grid position y: $gridPositionY")
+    println(s"maxRows: $maxRows")
+    println(s"maxCols: $maxCols")
 
+    direction.toLowerCase match {
+      case "north" => if (gridPositionY < maxRows-1){
+        gridPositionY += 1
+        energyRating -= 5
+      }
+      case "east" => if (gridPositionX < maxCols-1){
+        gridPositionX += 1
+        energyRating -= 5
+      }
+      case "south" => if (gridPositionY > 0){
+        gridPositionY -= 1
+        energyRating -= 5
+      }
+      case "west" => if (gridPositionX > 0){
+        gridPositionX -= 1
+        energyRating -= 5
+      }
+      case _ => println("Invalid direction")
+    }
   }
 
-  def drawStats(spriteBatch: SpriteBatch): Unit = {
-    val font:BitmapFont = new BitmapFont()
-    val str: String = "Tiger Statistics:";
-    font.draw(spriteBatch, str, 500, 450);
-
-    font.draw(spriteBatch, s"Health: $healthRating", 500, 430)
-    font.draw(spriteBatch, s"Energy: $energyRating", 500, 410)
-    font.draw(spriteBatch, s"Satiety: $satietyRating", 500, 390)
-    font.draw(spriteBatch, s"Intelligence: $intelligenceRating", 500, 370)
-  }
 }

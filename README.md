@@ -12,6 +12,9 @@ Want to see the current progress?
 - Run `sbt run`
 - Look at the grid of wonders and tiger stats!!
 
+# Playing Tiger's Game
+- arrow keys move up/down/left/
+
 # Completed
 + Setup SBT project
 + Added ligGDX 
@@ -34,3 +37,8 @@ Want to see the current progress?
 # Sounds
 - Bird Song and Nature Ambiance - Public Domain
 - Roaring Lion - Attribution 3.0, Recorded by Mike Koenig. http://soundbible.com/1272-Roaring-Lion.html
+
+# FAQ
+
+## Q) Is there a goal in "A Tiger's Game"?
+A) The game comes with no stated goal; it only observes and displays one's actions. You must take meaning into what these observations represent.

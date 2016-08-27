@@ -37,12 +37,13 @@ class TigerStory extends Game{
 
     // And then drawing things happen here O_O
 
-    spriteBatch.draw(caveTexture, 10, 10) // home base!
-    spriteBatch.draw(boarTexture, 120 + 10, 120 + 10)
-    spriteBatch.draw(deerTexture, 120 + 10, 10)
-    spriteBatch.draw(grassTexture, 10, 120 + 10)
-    spriteBatch.draw(mateTexture, 120 + 120 + 10, 120 + 10)
-    spriteBatch.draw(rabbitTexture, 120 + 10, 120 + 120 + 10)
+    // Resizing the 120s to 90s to see if it looks better D:
+    spriteBatch.draw(caveTexture, 10, 10, 90, 90) // home base!
+    spriteBatch.draw(boarTexture, 90 + 10, 90 + 10, 90, 90)
+    spriteBatch.draw(deerTexture, 90 + 10, 10, 90, 90)
+    spriteBatch.draw(grassTexture, 10, 90 + 10, 90, 90)
+    spriteBatch.draw(mateTexture, 90 + 90 + 10, 90 + 10, 90, 90)
+    spriteBatch.draw(rabbitTexture, 90 + 10, 90 + 90 + 10, 90, 90)
 
     // Tiger needs to go last (poor thing)
     spriteBatch.draw(tigerTexture,10,10)

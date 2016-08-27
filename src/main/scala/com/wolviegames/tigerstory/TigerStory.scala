@@ -6,6 +6,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch
 
 class TigerStory extends Game{
 
+  val TILE_SIZE = 90
+
   override def create(): Unit = {
     println("Tiger's Story")
   }
@@ -38,12 +40,12 @@ class TigerStory extends Game{
     // And then drawing things happen here O_O
 
     // Resizing the 120s to 90s to see if it looks better D:
-    spriteBatch.draw(caveTexture, 10, 10, 90, 90) // home base!
-    spriteBatch.draw(boarTexture, 90 + 10, 90 + 10, 90, 90)
-    spriteBatch.draw(deerTexture, 90 + 10, 10, 90, 90)
-    spriteBatch.draw(grassTexture, 10, 90 + 10, 90, 90)
-    spriteBatch.draw(mateTexture, 90 + 90 + 10, 90 + 10, 90, 90)
-    spriteBatch.draw(rabbitTexture, 90 + 10, 90 + 90 + 10, 90, 90)
+    spriteBatch.draw(caveTexture, 10, 10, TILE_SIZE, TILE_SIZE) // home base!
+    spriteBatch.draw(boarTexture, TILE_SIZE + 10, TILE_SIZE + 10, TILE_SIZE, TILE_SIZE)
+    spriteBatch.draw(deerTexture, TILE_SIZE + 10, 10, TILE_SIZE, TILE_SIZE)
+    spriteBatch.draw(grassTexture, 10, TILE_SIZE + 10, TILE_SIZE, TILE_SIZE)
+    spriteBatch.draw(mateTexture, 2 * TILE_SIZE + 10, TILE_SIZE + 10, TILE_SIZE, TILE_SIZE)
+    spriteBatch.draw(rabbitTexture, TILE_SIZE + 10, 2 * TILE_SIZE  + 10, TILE_SIZE, TILE_SIZE)
 
     // Tiger needs to go last (poor thing)
     spriteBatch.draw(tigerTexture,10,10)

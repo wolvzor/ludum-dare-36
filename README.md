@@ -20,9 +20,9 @@ Want to see the current progress?
 + Added ligGDX 
 + added textures for tiger and locations (cave, prey, mate, plain grass)
 + added grid code to display game layout
++ tiger base stats (satiety, health, energy, intelligence)
 
 # TODO
-- tiger base stats (satiety, health, energy, intelligence)
 - tiger base actions (sleep, hunt, mate, observe, move)
 - tiger base flavor text
 - intelligence benchmarks (carry items, use tools, acquire resources, discover fire, etc)

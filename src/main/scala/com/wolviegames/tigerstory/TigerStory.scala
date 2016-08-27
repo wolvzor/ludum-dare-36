@@ -3,8 +3,9 @@ package com.wolviegames.tigerstory
 import com.badlogic.gdx.graphics.{GL20, Texture}
 import com.badlogic.gdx.{Game, Gdx}
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
+import com.wolviegames.tigerstory.player.{BasicPlayer, BasicTiger, Player}
 
-class TigerStory extends Game{
+class TigerStory extends Game {
 
   val TILE_SIZE = 90
   val GAME_ROWS = 5
@@ -17,6 +18,8 @@ class TigerStory extends Game{
   var spriteBatch: SpriteBatch = null
   var tigerTexture: Texture = null
   var defaultTexture: Texture = null
+
+  var tigerPlayer: Player = new BasicTiger()
 
   def buildTextureMap: Map[String, Texture] = Map(
     ("boarTexture", new Texture(Gdx.files.internal("boar.jpg"))),
@@ -56,6 +59,10 @@ class TigerStory extends Game{
 
     // Tiger needs to go last (poor thing)
     spriteBatch.draw(tigerTexture,0,0)
+
+    // Draw Tiger Stats
+    tigerPlayer.drawStats(spriteBatch)
+
 
     spriteBatch.end
   }

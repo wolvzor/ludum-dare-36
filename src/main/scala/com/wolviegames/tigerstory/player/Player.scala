@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.{BitmapFont, SpriteBatch}
   * The player is the tiger that gets to Move Around The Screen And Do Things.
   */
 trait Player {
+  var tigerAlive: Boolean
   var satietyRating: Int
   var healthRating: Int
   var energyRating: Int
@@ -20,6 +21,7 @@ trait Player {
   def setTigerTexture(texture: Texture)
   def drawTiger(spriteBatch: SpriteBatch, timeSize: Int)
   def drawStats(spriteBatch: SpriteBatch)
+  def statCalculator(stat: String, amount: Int)
 }
 
 trait BasicPlayer extends Player{
@@ -32,6 +34,7 @@ trait BasicPlayer extends Player{
 }
 
 class BasicTiger extends BasicPlayer{
+  var tigerAlive: Boolean = true
   var satietyRating: Int = 50
   var healthRating: Int = 50
   var energyRating: Int = 50
@@ -58,10 +61,11 @@ class BasicTiger extends BasicPlayer{
     val str: String = "Tiger Statistics:";
     font.draw(spriteBatch, str, 500, 450);
 
-    font.draw(spriteBatch, s"Health: $healthRating", 500, 430)
-    font.draw(spriteBatch, s"Energy: $energyRating", 500, 410)
-    font.draw(spriteBatch, s"Satiety: $satietyRating", 500, 390)
-    font.draw(spriteBatch, s"Intelligence: $intelligenceRating", 500, 370)
+    font.draw(spriteBatch, s"Alive?: $tigerAlive", 500, 430)
+    font.draw(spriteBatch, s"Health: $healthRating", 500, 410)
+    font.draw(spriteBatch, s"Energy: $energyRating", 500, 390)
+    font.draw(spriteBatch, s"Satiety: $satietyRating", 500, 370)
+    font.draw(spriteBatch, s"Intelligence: $intelligenceRating", 500, 350)
   }
 
 
@@ -92,22 +96,53 @@ class BasicTiger extends BasicPlayer{
     direction.toLowerCase match {
       case "north" => if (gridPositionY < maxRows-1){
         gridPositionY += 1
-        energyRating -= 5
+        statCalculator("energy", -5)
       }
       case "east" => if (gridPositionX < maxCols-1){
         gridPositionX += 1
-        energyRating -= 5
+        statCalculator("energy", -5)
       }
       case "south" => if (gridPositionY > 0){
         gridPositionY -= 1
-        energyRating -= 5
+        statCalculator("energy", -5)
       }
       case "west" => if (gridPositionX > 0){
         gridPositionX -= 1
-        energyRating -= 5
+        statCalculator("energy", -5)
       }
       case _ => println("Invalid direction")
     }
   }
 
+  /*
+   * This is actually a major part of the game, where if the tiger's health goes to 0, DED.
+   * Getting some stats to 0 will actually affect other stats.
+   */
+  def statCalculator(stat: String, amount: Int): Unit ={
+
+    // Tiger energy levels
+    // I will make this all matchy and happy laters.
+    if (stat == "energy") {
+      if (amount + energyRating > 100) energyRating = 100
+      else if (amount + energyRating < 0) {
+        energyRating = 0
+        statCalculator("health", -5)
+      }
+      else
+        energyRating += amount
+    }
+
+    // Tiger energy levels
+    // If health goes to 0, that's it, thanks for playing, mmm
+    if (stat == "health") {
+      if (amount + healthRating > 100) healthRating = 100
+      else if (amount + healthRating < 0) {
+        healthRating = 0
+        tigerAlive = false
+      }
+      else
+        healthRating += amount
+    }
+
+  }
 }

@@ -13,7 +13,7 @@ Want to see the current progress?
 - Look at the grid of wonders and tiger stats!!
 
 # Playing Tiger's Game
-- arrow keys move up/down/left/
+- arrow keys move up/down/left/right
 
 # Completed
 + Setup SBT project

@@ -13,7 +13,7 @@ Want to see the current progress?
 - Look at the grid of wonders!
 
 # Known Issues
-- Malloc error: this is because I'm in HackyMcKludgeFo mode, and initializing `var`s and `val`s in the draw code, which is stupid. I'll move it elsewhere probably first thing Saturday morning?
+- `fatal error C9999: out of memory - internal malloc failed`: this is because I'm in HackyMcKludgeFo mode, and initializing `var`s and `val`s in the draw code, which is stupid. I'll move it elsewhere probably first thing Saturday morning?
 
 # Completed
 + Setup SBT project
@@ -31,4 +31,4 @@ Want to see the current progress?
 - tiger intermediate flavor text
 - add textures for advanced tiles (trees, fireplace, farm, animal pen, etc)
 - sounds!
-- create sense of ennui as the life of the tiger gets more complex, etc
+- create sense of ennui as the life of the tiger gets more complex, etc (example: basic sleep text for base, but as intermediate/advanced happens, the sleep text changes to something more profound, such as "To sleep, perchance to dream- ay, there's the rub")

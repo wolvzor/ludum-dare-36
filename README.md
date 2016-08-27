@@ -18,6 +18,7 @@ Want to see the current progress?
 + added textures for tiger and locations (cave, prey, mate, plain grass)
 + added grid code to display game layout
 + tiger base stats (satiety, health, energy, intelligence)
++ Basic background sound ambiance
 
 # TODO
 - tiger base actions (sleep, hunt, mate, observe, move)
@@ -27,5 +28,9 @@ Want to see the current progress?
 - tiger intermediate actions (carry, use, craft, skin, chop, plant, capture, feed animal, etc)
 - tiger intermediate flavor text
 - add textures for advanced tiles (trees, fireplace, farm, animal pen, etc)
-- sounds!
+- tiger sounds when performing actions
 - create sense of ennui as the life of the tiger gets more complex, etc (example: basic sleep text for base, but as intermediate/advanced happens, the sleep text changes to something more profound, such as "To sleep, perchance to dream- ay, there's the rub")
+
+# Sounds
+- Bird Song and Nature Ambiance - Public Domain
+- Roaring Lion - Attribution 3.0, Recorded by Mike Koenig. http://soundbible.com/1272-Roaring-Lion.html

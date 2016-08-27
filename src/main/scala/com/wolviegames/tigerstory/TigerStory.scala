@@ -1,5 +1,6 @@
 package com.wolviegames.tigerstory
 
+import com.badlogic.gdx.audio.Sound
 import com.badlogic.gdx.graphics.{GL20, Texture}
 import com.badlogic.gdx.{Game, Gdx}
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
@@ -30,6 +31,11 @@ class TigerStory extends Game {
     ("rabbitTexture", new Texture(Gdx.files.internal("rabbit.jpg")))
   )
 
+  def loadSounds: Map[String, Sound] = Map (
+    ("birds", Gdx.audio.newSound(Gdx.files.internal("sounds//Bird Song-SoundBible.com-1355483122.mp3"))),
+    ("nature", Gdx.audio.newSound(Gdx.files.internal("sounds//Nature Ambiance-SoundBible.com-1444637890.mp3"))),
+    ("tiger", Gdx.audio.newSound(Gdx.files.internal("sounds//Roaring Lion-SoundBible.com-527774719.mp3")))
+  )
 
 
   override def create(): Unit = {
@@ -42,6 +48,9 @@ class TigerStory extends Game {
     val textureMap = buildTextureMap
 
     populateGrid(textureMap, defaultTexture)
+
+    val soundMap = loadSounds
+    soundMap.getOrElse("nature",null).loop(1.0f)
 
   }
 

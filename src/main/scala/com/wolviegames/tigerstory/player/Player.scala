@@ -29,8 +29,8 @@ trait Player {
 
 trait BasicPlayer extends Player{
   // These are actions that the player can do with the
-  def sleep
-  def hunt
+  def sleep: Boolean
+  def hunt: Boolean
   def mate
   def observe
   def move(maxRows:Int, maxCols:Int, direction: String, tileGrid: Array[Array[GameTile]])
@@ -136,11 +136,19 @@ class BasicTiger extends BasicPlayer{
         satietyRating += amount
     }
 
+    // Tiger intelligence levels
+    // This always increments.
+    // This will ignore negative numbers for now
+    if (stat == "intelligence") {
+      if (amount > 0)
+        intelligenceRating += amount
+    }
+
   }
 
   // Basic Player
 
-  def sleep: Unit = {
+  def sleep: Boolean = {
     currentPosition.tileType match {
       case "cave" => {
         statCalculator("energy", 100)
@@ -148,16 +156,49 @@ class BasicTiger extends BasicPlayer{
         statCalculator("satiety", -20)
         actionMessage = "Sleep Good. Energy Up. Stronger Now."
         resetError
+        true
       }
       case _ => {
         resetActionMessage
         currentErrorCommand = "No Good. No Sleep. Not Cave."
+        false
       }
     }
   }
 
-  def hunt: Unit ={
+  def hunt: Boolean ={
+    currentPosition.tileType match {
+      case "rabbit" => {
+        statCalculator("satiety", 20)
+        statCalculator("intelligence", 20)
+        statCalculator("energy", -10)
+        statCalculator("health", -5)
+        actionMessage = "Eat Rabbit. Rabbit good."
+        resetError
+        true
+      }
+      case "boar" =>{
+        statCalculator("satiety", 40)
+        statCalculator("intelligence", 40)
+        statCalculator("energy", -15)
+        statCalculator("health", -10)
+        actionMessage = "Eat Boar. Boar good."
+        resetError
+        true
+      }
 
+      case "deer" =>{
+        statCalculator("satiety", 60)
+        statCalculator("intelligence", 60)
+        statCalculator("energy", -20)
+        statCalculator("health", -15)
+        actionMessage = "Eat Deer. Deer good."
+        resetError
+        true
+      }
+      case _ =>
+        false
+    }
   }
 
   def mate: Unit = {

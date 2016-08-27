@@ -15,6 +15,7 @@ Want to see the current progress?
 # Playing Tiger's Game
 - arrow keys move up/down/left/right
 - 'S' to sleep
+- 'H' to hunt
 
 # Completed
 + Setup SBT project
@@ -23,11 +24,11 @@ Want to see the current progress?
 + added grid code to display game layout
 + tiger base stats (satiety, health, energy, intelligence)
 + Basic background sound ambiance
-+ Tiger base actions(move, sleep)
++ Tiger base actions(move, sleep, hunt)
 + Tiger dead/alive
 
 # TODO
-- tiger base actions (hunt, mate, observe)
+- tiger base actions (mate, observe)
 - tiger base flavor text
 - intelligence benchmarks (carry items, use tools, acquire resources, discover fire, etc)
 - tiger intermediate stats (self-esteem, actualization, self-efficacy, depression, anxiety, these are just ideas?)

@@ -25,6 +25,8 @@ class TigerStory extends Game {
   var tigerPlayer: BasicTiger = new BasicTiger()
 
   var inputTimestamp = DateTime.now()
+  var tileMap: Map[String, GameTile] = null
+
 
   def buildTileMap: Map[String, GameTile] = Map(
     ("boar", new GameTile("boar", new Texture(Gdx.files.internal("boar.jpg")))),
@@ -52,7 +54,7 @@ class TigerStory extends Game {
     tigerPlayer.setPositionInformation(homeTile)
     inputTimestamp = DateTime.now()
 
-    val tileMap = buildTileMap
+    tileMap = buildTileMap
 
     populateGrid(tileMap, defaultTile)
 
@@ -90,8 +92,24 @@ class TigerStory extends Game {
       }
 
       // Actions
+      // Sleep
       if (Gdx.input.isKeyPressed(Input.Keys.S)) {
-        tigerPlayer.sleep
+        val result = tigerPlayer.sleep
+        if (result) {
+          // Grids reset
+          println("reset")
+          populateGrid(tileMap, defaultTile)
+        }
+        inputTimestamp = DateTime.now()
+      }
+
+      // Hunt
+      if (Gdx.input.isKeyPressed(Input.Keys.H)) {
+        val result = tigerPlayer.hunt
+        if (result){
+          // things were eaten!
+          gridMcGridFace(tigerPlayer.gridPositionX)(tigerPlayer.gridPositionY) = defaultTile
+        }
         inputTimestamp = DateTime.now()
       }
     }

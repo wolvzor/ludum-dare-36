@@ -8,8 +8,3 @@ class TigerStory extends Game{
     println("Tiger's Story")
   }
 }
-
-
-/*object TigerStory {
-  def main(args: Array[String]) = println("Tiger's Story")
-}*/

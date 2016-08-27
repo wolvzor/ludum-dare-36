@@ -13,34 +13,37 @@ class TigerStory extends Game{
   // I will enum/class the SHIT out of this in a bit
   var gridMcGridFace = Array.ofDim[Texture](GAME_ROWS,GAME_COLS)
 
+  // I REALLY HATE THIS, WHY LIBGDX WHY
+  var spriteBatch: SpriteBatch = null
+  var tigerTexture: Texture = null
+  var defaultTexture: Texture = null
+
+  def buildTextureMap: Map[String, Texture] = Map(
+    ("boarTexture", new Texture(Gdx.files.internal("boar.jpg"))),
+    ("caveTexture", new Texture(Gdx.files.internal("cave.jpg"))),
+    ("deerTexture", new Texture(Gdx.files.internal("deer.jpg"))),
+    ("grassTexture", new Texture(Gdx.files.internal("grass.jpg"))),
+    ("mateTexture", new Texture(Gdx.files.internal("mate.jpg"))),
+    ("rabbitTexture", new Texture(Gdx.files.internal("rabbit.jpg")))
+  )
+
+
+
   override def create(): Unit = {
     println("Tiger's Story")
+
+    spriteBatch = new SpriteBatch()
+    tigerTexture = new Texture(Gdx.files.internal("tiger-small.jpg"))
+    defaultTexture = new Texture(Gdx.files.internal("grass.jpg"))
+
+    val textureMap = buildTextureMap
+
+    populateGrid(textureMap, defaultTexture)
+
   }
 
   override def render(): Unit = {
 
-    // THESE DO NOT BELONG HERE
-    // YOUR INITIALIZATION IS BAD AND YOU SHOULD FEEL BAD
-    // SERIOUSLY THESE NEED TO MOVE SOON
-    val spriteBatch: SpriteBatch = new SpriteBatch()
-
-    val textureMap: Map[String, Texture] = Map(
-      ("boarTexture", new Texture(Gdx.files.internal("boar.jpg"))),
-      ("caveTexture", new Texture(Gdx.files.internal("cave.jpg"))),
-      ("deerTexture", new Texture(Gdx.files.internal("deer.jpg"))),
-      ("grassTexture", new Texture(Gdx.files.internal("grass.jpg"))),
-      ("mateTexture", new Texture(Gdx.files.internal("mate.jpg"))),
-      ("rabbitTexture", new Texture(Gdx.files.internal("rabbit.jpg")))
-    )
-
-    val tigerTexture = new Texture(Gdx.files.internal("tiger-small.jpg"))
-    val defaultTexture = new Texture(Gdx.files.internal("grass.jpg"))
-
-    // Populate GridMcGridFace
-    populateGrid(textureMap, defaultTexture)
-
-    // Where the actual drawing is taking place.
-    // Like it should.
     Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT) // Apparently this clears the screen; wtf gdx
     spriteBatch.begin
 

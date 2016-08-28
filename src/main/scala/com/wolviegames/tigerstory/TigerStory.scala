@@ -13,8 +13,7 @@ class TigerStory extends Game {
   val TILE_SIZE = 90
   val GAME_ROWS = 5
   val GAME_COLS = 5
-
-  // I will enum/class the SHIT out of this in a bit
+  
   var gridMcGridFace = Array.ofDim[GameTile](GAME_ROWS,GAME_COLS)
 
   // I REALLY HATE THIS, WHY LIBGDX WHY

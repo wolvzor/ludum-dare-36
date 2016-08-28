@@ -13,7 +13,7 @@ class TigerStory extends Game {
   val TILE_SIZE = 90
   val GAME_ROWS = 5
   val GAME_COLS = 5
-  
+
   var gridMcGridFace = Array.ofDim[GameTile](GAME_ROWS,GAME_COLS)
 
   // I REALLY HATE THIS, WHY LIBGDX WHY
@@ -77,16 +77,13 @@ class TigerStory extends Game {
       if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
         tigerPlayer.move(GAME_ROWS, GAME_COLS, "south", gridMcGridFace)
         inputTimestamp = DateTime.now()
-        inputTimestamp = DateTime.now()
       }
       if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
         tigerPlayer.move(GAME_ROWS, GAME_COLS, "east", gridMcGridFace)
         inputTimestamp = DateTime.now()
-        inputTimestamp = DateTime.now()
       }
       if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
         tigerPlayer.move(GAME_ROWS, GAME_COLS, "west", gridMcGridFace)
-        inputTimestamp = DateTime.now()
         inputTimestamp = DateTime.now()
       }
 
